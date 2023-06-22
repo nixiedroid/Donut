@@ -10,8 +10,3 @@ just compile jar file and run
 ````
 java -jar Donut.jar
 ````
-
-### How it works
-![3d axes Image](https://github.com/nixiedroid/Donut/blob/master/images/3d_axes.png?raw=true)
-
-Frameb
