@@ -1,16 +1,13 @@
 package com.nixiedroid.Donut.render;
 
 public class Brightness {
-
-   // private static final int
-    private static final int PRESCALER;
     private static final float SQRT_2 = 1.414F;
     public static final char[] palette = new char[]{'.',',','-','~',':',';','=','!','*','#','$','0',};
+    private static final char[] gradient = ".'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$".toCharArray();
 
-    static {
-        PRESCALER = (int)(palette.length/SQRT_2);
-    }
     public static char getBrightnessChar(double brightness){
-        return palette[Math.max((int)(brightness * palette.length -1 ), 0)];
+
+        return gradient[Math.max((int)(brightness * gradient.length - 1 ), 0)];
+        //return
     }
 }

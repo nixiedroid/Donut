@@ -2,7 +2,8 @@ package com.nixiedroid.Donut.render.figure;
 
 import com.nixiedroid.Donut.render.Coords;
 import com.nixiedroid.Donut.render.Brightness;
-import com.nixiedroid.Donut.render.Frame;
+import com.nixiedroid.Donut.render.Canvas;
+import com.nixiedroid.Donut.render.LightSource;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -12,8 +13,13 @@ public class DonutOriginal extends Figure {
     static float phi, theta;
 
     @Override
-    public Frame calculate(Frame frame, Coords rotation, Coords lightSource) {
-        frame.emptyBuffers(' ',0);
+    protected double getAngleStep() {
+        return 0;
+    }
+
+    @Override
+    public void fillCanvas(Canvas canvas, Coords rotation, LightSource lightSource) {
+        canvas.emptyBuffers(' ',0);
         for (theta = 0; TAU > theta; theta += 0.07) {
             for (phi = 0; TAU > phi; phi += 0.02) {
                 double sinPhi = sin(phi);
@@ -31,20 +37,19 @@ public class DonutOriginal extends Figure {
                 double h = cosTheta + 2;
                 double oneOverZPos = 1 / (sinPhi * h * sinXRot + sinTheta * cosXRot + 5);
                 double t = sinPhi * h * cosXRot - sinTheta * sinXRot;
-                int xProjection = (int) frame.projectX(oneOverZPos * (cosPhi * h * cosZRot - t * sinZRot),30);
-                int yProjection = (int) frame.projectY(oneOverZPos * (cosPhi * h * sinZRot + t * cosZRot),15);
+                int xProjection = (int) canvas.projectX(oneOverZPos * (cosPhi * h * cosZRot - t * sinZRot),30);
+                int yProjection = (int) canvas.projectY(oneOverZPos * (cosPhi * h * sinZRot + t * cosZRot),15);
                 int brightness = (int) (8 * ((sinTheta * sinXRot - sinPhi * cosTheta * cosXRot) * cosZRot -
                         sinPhi * cosTheta * sinXRot -
                         sinTheta * cosXRot -
                         cosPhi * cosTheta * sinZRot));
-                if (frame.ifCoordsInBoundaries(xProjection, yProjection)
-                        && oneOverZPos > frame.getZBuffer()[yProjection][xProjection]
+                if (canvas.ifCoordsInBoundaries(xProjection, yProjection)
+                        && oneOverZPos > canvas.getZBuffer()[yProjection][xProjection]
                 ) {
-                    frame.getZBuffer()[yProjection][xProjection] = oneOverZPos;
-                    frame.getXYBuffer()[yProjection][xProjection] =  Brightness.palette[Math.max(brightness, 0)];;
+                    canvas.getZBuffer()[yProjection][xProjection] = oneOverZPos;
+                    canvas.getXYBuffer()[yProjection][xProjection] =  Brightness.palette[Math.max(brightness, 0)];;
                 }
             }
         }
-        return frame;
     }
 }
