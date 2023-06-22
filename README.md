@@ -12,6 +12,6 @@ java -jar Donut.jar
 ````
 
 ### How it works
-![test image](https://github.com/nixiedroid/Donut/blob/master/images/3d_axis.png?raw=true)
+![3d axes Image](https://github.com/nixiedroid/Donut/blob/master/images/3d_axes.png?raw=true)
 
 Frameb

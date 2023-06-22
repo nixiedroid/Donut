@@ -20,7 +20,7 @@ public class Coords {
 
 
     public Coords set(double x, double y, double z){
-        if(isNormalised && x>1 )
+        //if(isNormalised && x>1 )
         this.x = x;
         this.y = y;
         this.z = z;
@@ -101,7 +101,11 @@ public class Coords {
     private double fastInvSqrt(double value){
         return 0;
     }
-    public double normaliseVector(){
-        return 0;
+    public Coords normaliseVector(){
+        double normal = 1/Math.sqrt(x*x+y*y+z*z);
+        x*=normal;
+        y*=normal;
+        z*=normal;
+        return this;
     }
 }

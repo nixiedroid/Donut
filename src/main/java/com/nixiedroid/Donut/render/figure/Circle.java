@@ -13,8 +13,8 @@ public class Circle extends Figure{
     public Frame calculate(Frame frame, Coords rotation, Coords lightSource) {
         frame.emptyBuffers();
         for (theta = 0; TAU > theta; theta += 0.1) {
-            int xProjection = frame.upscaleX(cos(theta));
-            int yProjection = frame.upscaleY(sin(theta));
+            int xProjection = frame.projectX(cos(theta));
+            int yProjection = frame.projectY(sin(theta));
             frame.getXYBuffer()[yProjection][xProjection] = '*';
         }
         return frame;

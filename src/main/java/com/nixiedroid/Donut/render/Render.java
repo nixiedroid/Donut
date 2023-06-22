@@ -48,7 +48,7 @@ public class Render {
             return this;
         }
         public Builder setLightSource(final Coords lightSource) {
-            render.lightSource = lightSource;
+            render.lightSource = lightSource.normaliseVector();
             return this;
         }
 

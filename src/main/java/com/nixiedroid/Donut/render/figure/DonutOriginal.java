@@ -13,8 +13,7 @@ public class DonutOriginal extends Figure {
 
     @Override
     public Frame calculate(Frame frame, Coords rotation, Coords lightSource) {
-        frame.emptyBuffers();
-
+        frame.emptyBuffers(' ',0);
         for (theta = 0; TAU > theta; theta += 0.07) {
             for (phi = 0; TAU > phi; phi += 0.02) {
                 double sinPhi = sin(phi);
@@ -30,17 +29,19 @@ public class DonutOriginal extends Figure {
                 double sinZRot = sin(rotation.z);
 
                 double h = cosTheta + 2;
-                double ooZPos = 1 / (sinPhi * h * sinXRot + sinTheta * cosXRot + 5);
+                double oneOverZPos = 1 / (sinPhi * h * sinXRot + sinTheta * cosXRot + 5);
                 double t = sinPhi * h * cosXRot - sinTheta * sinXRot;
-                int xProjection = (int) (40 + 30 * ooZPos * (cosPhi * h * cosZRot - t * sinZRot));
-                int yProjection = (int) (12 + 15 * ooZPos * (cosPhi * h * sinZRot + t * cosZRot));
-                double brightness = ((sinTheta * sinXRot - sinPhi * cosTheta * cosXRot) * cosZRot -
+                int xProjection = (int) frame.projectX(oneOverZPos * (cosPhi * h * cosZRot - t * sinZRot),30);
+                int yProjection = (int) frame.projectY(oneOverZPos * (cosPhi * h * sinZRot + t * cosZRot),15);
+                int brightness = (int) (8 * ((sinTheta * sinXRot - sinPhi * cosTheta * cosXRot) * cosZRot -
                         sinPhi * cosTheta * sinXRot -
                         sinTheta * cosXRot -
-                        cosPhi * cosTheta * sinZRot);
-                if (frame.ifCoordsInBoundaries(xProjection, yProjection) && ooZPos > frame.getZBuffer()[yProjection][xProjection]) {
-                    frame.getZBuffer()[yProjection][xProjection] = ooZPos;
-                    frame.getXYBuffer()[yProjection][xProjection] = Brightness.getBrightnessChar(brightness);
+                        cosPhi * cosTheta * sinZRot));
+                if (frame.ifCoordsInBoundaries(xProjection, yProjection)
+                        && oneOverZPos > frame.getZBuffer()[yProjection][xProjection]
+                ) {
+                    frame.getZBuffer()[yProjection][xProjection] = oneOverZPos;
+                    frame.getXYBuffer()[yProjection][xProjection] =  Brightness.palette[Math.max(brightness, 0)];;
                 }
             }
         }
