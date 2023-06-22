@@ -1,21 +1,24 @@
 package com.nixiedroid.Donut;
 
 
-import com.nixiedroid.Donut.figure.Donut;
-import com.nixiedroid.Donut.figure.Sphere;
+import com.nixiedroid.Donut.render.figure.*;
+import com.nixiedroid.Donut.render.Coords;
 import com.nixiedroid.Donut.render.Render;
 
 public class Main {
 
     public static void main(String[] args) {
+        Coords rotationScale = new Coords(-0.1f,-0.1f,0.0f);
+        Coords SingleFrameRotation = new Coords(-0.1f,-0.1f,0.0f);
         Render render = new Render.Builder()
-                .withRotationScale(0.08f,0f,0.02f)
-                .usingFigure(new Sphere())
+                .withRotationScale(rotationScale)
+                .usingFigure(new Donut())
                 .createWindow(80,22)
+                .setLightSource(new Coords(0,0,-1))
                 .build();
 
-       // render.drawFrames(20);
-        //render.drawFrame(3.14/4,0.08,3.14/2);
-       render.drawFrame();
+        render.drawFrames(100);
+        //render.drawFrame();
+        //render.drawFrame(rotation);
     }
 }

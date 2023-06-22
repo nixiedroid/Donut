@@ -1,7 +1,5 @@
 package com.nixiedroid.Donut.render;
 
-import com.nixiedroid.Donut.ANSI;
-
 import java.util.Arrays;
 
 public class Frame {
@@ -43,11 +41,24 @@ public class Frame {
             System.out.println();
         }
     }
+    public int projectX(double normalisedX){
+        return (int) (width/2 + (12)*normalisedX);
+    }
+    public int projectY(double normalisedY){
+        return (int) (height/2 + (6.5)*normalisedY);
+    }
     public int upscaleX(double normalisedX){
-        return (int) (width/2 + (width/2-1)*normalisedX);
+        return (int) (width/2 + (12)*normalisedX);
     }
     public int upscaleY(double normalisedY){
+        return (int) (height/2 + (6.5)*normalisedY);
+    }
+    public int stretchX(double normalisedX){
+        return (int) (width/2 + (width/2-1)*normalisedX);
+    }
+    public int stretchY(double normalisedY){
         return (int) (height/2 + (height/2-1)*normalisedY);
     }
+
 
 }

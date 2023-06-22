@@ -1,6 +1,7 @@
 package com.nixiedroid.Donut.render;
 
 public class Brightness {
+
    // private static final int
     private static final int PRESCALER;
     private static final float SQRT_2 = 1.414F;
@@ -11,5 +12,8 @@ public class Brightness {
     }
     public static char getBrightnessChar(double brightness){
         return palette[Math.max((int)(brightness* PRESCALER), 0)];
+    }
+    public static char getBrightnessCharV2(int brightness){
+        return palette[Math.max(brightness, 0)];
     }
 }

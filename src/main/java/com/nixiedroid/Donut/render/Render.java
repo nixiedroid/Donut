@@ -1,35 +1,27 @@
 package com.nixiedroid.Donut.render;
 
 
-import com.nixiedroid.Donut.ANSI;
-import com.nixiedroid.Donut.figure.Figure;
+import com.nixiedroid.Donut.render.figure.Figure;
 
 public class Render {
-    private double xRot = 0;
-    private double yRot = 0;
-    private double zRot = 0;
-    private double xRotScale = 0;
-    private double yRotScale = 0;
-    private double zRotScale = 0;
-
     private Figure figure;
     private Frame frameBuffer;
-
+    private Coords lightSource;
+    private final Coords rotation = new Coords(0,0,0);
+    private Coords rotationScale = new Coords(0,0,0);
 
     private Render() {
         ANSI.clearScreen();
     }
 
     public void drawFrame() {
-        figure.calculate(frameBuffer, xRot, yRot, zRot);
+        figure.calculate(frameBuffer, rotation,lightSource);
         frameBuffer.draw();
-        zRot += zRotScale;
-        xRot += xRotScale;
-        yRot += yRotScale;
+        rotation.add(rotationScale);
     }
 
-    public void drawFrame(double xRot, double yRot, double zRot) {
-        figure.calculate(frameBuffer, xRot, yRot, zRot);
+    public void drawFrame(Coords rotation) {
+        figure.calculate(frameBuffer, rotation,lightSource);
         frameBuffer.draw();
     }
 
@@ -46,15 +38,17 @@ public class Render {
             render = new Render();
         }
 
-        public Builder withRotationScale(double xAxis, double yAxis, double zAxis) {
-            render.xRotScale = xAxis;
-            render.yRotScale = yAxis;
-            render.zRotScale = zAxis;
+        public Builder withRotationScale(Coords rotationScale) {
+            render.rotationScale = rotationScale;
             return this;
         }
 
         public Builder usingFigure(final Figure fig) {
             render.figure = fig;
+            return this;
+        }
+        public Builder setLightSource(final Coords lightSource) {
+            render.lightSource = lightSource;
             return this;
         }
 
@@ -66,6 +60,7 @@ public class Render {
         public Render build() {
             if (render.figure == null) throw new IllegalArgumentException("Figure not specified");
             if (render.frameBuffer == null) throw new IllegalArgumentException("Framebuffer is null");
+            if (render.lightSource == null) render.lightSource = new Coords(0,-1,1);
             return render;
         }
     }
