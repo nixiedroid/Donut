@@ -1,13 +1,13 @@
 package com.nixiedroid.Donut.render;
 
+import net.jafama.FastMath;
+
 public class Coords {
     public double x;
     public double y;
     public double z;
-    private double sinA;
-    private double cosA;
-    private boolean isNormalised = false;
-    private boolean isStrictNormalised = false;
+    private double sinA, cosA;
+    //private DoubleWrapper cosA = new DoubleWrapper();
 
     public Coords(double x, double y, double z) {
         this.x = x;
@@ -15,97 +15,79 @@ public class Coords {
         this.z = z;
     }
 
-    public Coords() {
-    }
-
-
-    public Coords set(double x, double y, double z){
-        //if(isNormalised && x>1 )
+    public Coords set(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
         return this;
     }
-    public Coords add(double x, double y, double z){
+    public Coords set(Coords coords) {
+        this.x = coords.x;
+        this.y = coords.y;
+        this.z = coords.z;
+        return this;
+    }
+
+    public Coords add(double x, double y, double z) {
         this.x += x;
         this.y += y;
         this.z += z;
         return this;
     }
-    public Coords add(double value){
-        this.x += value;
-        this.y += value;
-        this.z += value;
-        return this;
+
+    public Coords add(double value) {
+        return add(value,value,value);
     }
-    public Coords add(Coords value){
+
+    public Coords add(Coords value) {
         this.x += value.x;
         this.y += value.y;
         this.z += value.z;
         return this;
     }
-    public Coords mult(double value){
-        this.x *= value;
-        this.y *= value;
-        this.z *= value;
-        return this;
+    public Coords mult(double value) {
+        return mult(value,value,value);
     }
-    public Coords mult(double x, double y, double z){
+    public Coords mult(double x, double y, double z) {
         this.x *= x;
         this.y *= y;
         this.z *= z;
         return this;
     }
-
     public Coords rotateX(double angle) {
-        cosA = Math.cos(angle);
-        sinA = Math.sin(angle);
+        sinA = FastMath.sinQuick(angle);
+        cosA = FastMath.cosQuick(angle);
         double tmpY = y;
         y = z * sinA + y * cosA;
         z = -(tmpY * sinA) + z * cosA;
         return this;
     }
-
     public Coords rotateY(double angle) {
-        cosA = Math.cos(angle);
-        sinA = Math.sin(angle);
+        sinA = FastMath.sinQuick(angle);
+        cosA = FastMath.cosQuick(angle);
         double tmpZ = z;
         z = x * sinA + z * cosA;
         x = -(tmpZ * sinA) + x * cosA;
         return this;
     }
-
     public Coords rotateZ(double angle) {
-        cosA = Math.cos(angle);
-        sinA = Math.sin(angle);
+        sinA = FastMath.sinQuick(angle);
+        cosA = FastMath.cosQuick(angle);
         double tmpX = x;
         x = y * sinA + x * cosA;
         y = -(tmpX * sinA) + y * cosA;
         return this;
     }
-    public boolean isNormalised(){
-        return isNormalised;
+    public double getMagnitude(){
+        return FastMath.invSqrtQuick(x * x + y * y + z * z);
     }
-    public void setNormalised(boolean value){
-        this.isNormalised = value;
-    }
-    public boolean isStrictNormalised(){
-        return isStrictNormalised;
-    }
-    public void setStrictNormalisedNormalised(){
-        this.isStrictNormalised = true;
-    }
-    private boolean validateNormalised(double x, double y, double z){
-           return false     ;
-    }
-    private double fastInvSqrt(double value){
-        return 0;
-    }
-    public Coords normaliseVector(){
-        double normal = 1/Math.sqrt(x*x+y*y+z*z);
-        x*=normal;
-        y*=normal;
-        z*=normal;
+    public Coords normalise() {
+        double magnitude = getMagnitude();
+       // double magnitude = invSqrt(x * x + y * y + z * z);
+        x *= magnitude;
+        y *= magnitude;
+        z *= magnitude;
         return this;
     }
+
 }

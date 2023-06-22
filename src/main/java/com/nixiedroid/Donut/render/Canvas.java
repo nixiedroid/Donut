@@ -2,15 +2,16 @@ package com.nixiedroid.Donut.render;
 
 import java.util.Arrays;
 
-public class Frame {
+public class Canvas {
     private final double[][] zBuffer;
-    private final int[][] xyBuffer;
+    private final char[][] xyBuffer;
     private final int height;
     private final int width;
+    private final StringBuilder sb = new StringBuilder();
 
-    public Frame(final int width, final int height) {
+    public Canvas(final int width, final int height) {
         this.zBuffer = new double[height][width];
-        this.xyBuffer = new int[height][width];
+        this.xyBuffer = new char[height][width];
 
         this.height = height;
         this.width = width;
@@ -20,16 +21,14 @@ public class Frame {
         return zBuffer;
     }
 
-    public int[][] getXYBuffer() {
+    public char[][] getXYBuffer() {
         return xyBuffer;
     }
 
     public void emptyBuffers() {
-        for (int row = 0; row < height; row++) {
-            Arrays.fill(xyBuffer[row], ' ');
-            Arrays.fill(zBuffer[row], 1);
-        }
+        emptyBuffers(' ',1);
     }
+
     public void emptyBuffers(char character, double value) {
         for (int row = 0; row < height; row++) {
             Arrays.fill(xyBuffer[row], character);
@@ -43,12 +42,12 @@ public class Frame {
 
     public void draw() {
         ANSI.moveCursorToHome();
+        sb.setLength(0);
         for (int row = 0; row < height; row++) {
-            for (int column = 0; column < width; column++) {
-                System.out.print((char) xyBuffer[row][column]);
-            }
-            System.out.println();
+            sb.append(xyBuffer[row]);
+            sb.append("\n");
         }
+        System.out.print(sb);
     }
 
     public int projectX(double value, double multiplier) {
@@ -60,21 +59,21 @@ public class Frame {
     }
 
     public int projectX(double normalisedValue) {
-        if (normalisedValue > 1) throw new IllegalArgumentException("X = " +normalisedValue+ " is not normalised!");
-        return (int) (width / 2 - 1 + (height / 2) * normalisedValue);
+        if (normalisedValue > 1) throw new IllegalArgumentException("X = " + normalisedValue + " is not normalised!");
+        return (int) (width / 2 - 1 + (height / 2) * 2.5 * normalisedValue);
     }
 
     public int projectY(double normalisedValue) {
-        if (normalisedValue > 1) throw new IllegalArgumentException("Y = " +normalisedValue+ " is not normalised!");
+        if (normalisedValue > 1) throw new IllegalArgumentException("Y = " + normalisedValue + " is not normalised!");
         return (int) (height / 2 - 1 + (height / 2) * normalisedValue);
     }
 
     public int stretchX(double normalisedX) {
-        return (int) (width / 2 + (width / 2 - 1) * normalisedX);
+        return (int) (width / 2 - 1 + (width / 2) * normalisedX);
     }
 
     public int stretchY(double normalisedY) {
-        return (int) (height / 2 + (height / 2 - 1) * normalisedY);
+        return (int) (height / 2 - 1 + (height / 2) * normalisedY);
     }
 
 
