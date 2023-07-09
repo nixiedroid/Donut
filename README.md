@@ -4,8 +4,9 @@ based on https://www.a1k0n.net/2011/07/20/donut-math.html
 ---------
 ### How to run
 Should be run in terminal supporting ANSI escape codes
-like WindowsTerminal
-just compile jar file and run
+like WindowsTerminal.
+
+Just compile jar file and run
 ````
 java -jar Donut.jar
 ````

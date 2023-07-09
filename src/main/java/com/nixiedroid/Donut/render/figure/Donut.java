@@ -1,8 +1,6 @@
 package com.nixiedroid.Donut.render.figure;
 
-import com.nixiedroid.Donut.render.Canvas;
-import com.nixiedroid.Donut.render.Coords;
-import com.nixiedroid.Donut.render.LightSource;
+import com.nixiedroid.Donut.render.FrameBuffer;
 
 public class Donut extends Figure {
     float theta, phi;
@@ -13,9 +11,9 @@ public class Donut extends Figure {
     }
 
     @Override
-    public void fillCanvas(Canvas canvas, Coords rotation, LightSource lightSource) {
-        canvas.emptyBuffers();
-        for (theta = 0; TAU > theta; theta += getAngleStep()*4) {
+    public void calculateSingleFrame(FrameBuffer canvas) {
+        canvas.emptyFrameBuffer();
+        for (theta = 0; TAU > theta; theta += getAngleStep()*2) {
             for (phi = 0; TAU > phi; phi += getAngleStep()) {
                 dot.set(0.3, 0, 0)
                         .rotateY(theta)

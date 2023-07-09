@@ -2,37 +2,32 @@ package com.nixiedroid.Donut.render;
 
 import java.util.Arrays;
 
-public class Canvas {
+public class FrameBuffer {
     private final double[][] zBuffer;
-    private final char[][] xyBuffer;
+
+    private final double[][] frameBuffer;
     private final int height;
     private final int width;
-    private final StringBuilder sb = new StringBuilder();
 
-    public Canvas(final int width, final int height) {
+
+    public FrameBuffer(final int width, final int height) {
+        this.frameBuffer = new double[height][width];
         this.zBuffer = new double[height][width];
-        this.xyBuffer = new char[height][width];
-
         this.height = height;
         this.width = width;
     }
 
+    public double[][] getFrameBuffer() {
+        return frameBuffer;
+    }
     public double[][] getZBuffer() {
         return zBuffer;
     }
 
-    public char[][] getXYBuffer() {
-        return xyBuffer;
-    }
-
-    public void emptyBuffers() {
-        emptyBuffers(' ',1);
-    }
-
-    public void emptyBuffers(char character, double value) {
+    public void emptyFrameBuffer() {
         for (int row = 0; row < height; row++) {
-            Arrays.fill(xyBuffer[row], character);
-            Arrays.fill(zBuffer[row], value);
+            Arrays.fill(frameBuffer[row], 0);
+            Arrays.fill(zBuffer[row], 1);
         }
     }
 
@@ -40,14 +35,12 @@ public class Canvas {
         return (height > column && column > 0) && (width > row && row > 0);
     }
 
-    public void draw() {
-        ANSI.moveCursorToHome();
-        sb.setLength(0);
-        for (int row = 0; row < height; row++) {
-            sb.append(xyBuffer[row]);
-            sb.append("\n");
-        }
-        System.out.print(sb);
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 
     public int projectX(double value, double multiplier) {

@@ -1,9 +1,6 @@
 package com.nixiedroid.Donut.render.figure;
 
-import com.nixiedroid.Donut.render.Canvas;
-import com.nixiedroid.Donut.render.Coords;
-import com.nixiedroid.Donut.render.LightSource;
-
+import com.nixiedroid.Donut.render.FrameBuffer;
 public class Spheres extends Figure{
     float theta,phi;
 
@@ -13,8 +10,8 @@ public class Spheres extends Figure{
     }
 
     @Override
-    public void fillCanvas(Canvas canvas, Coords rotation, LightSource lightSource) {
-        canvas.emptyBuffers();
+    protected void calculateSingleFrame(FrameBuffer frameBuffer) {
+        frameBuffer.emptyFrameBuffer();
         for (theta = 0; TAU > theta; theta += getAngleStep()) {
             for (phi = 0; TAU > phi; phi += getAngleStep()) {
                 dot.set(0.2, 0, 0)
@@ -25,16 +22,17 @@ public class Spheres extends Figure{
                         .rotateY(rotation.y)
                         .rotateZ(rotation.z)
                 ;
-                dotNormal.set(1, 0, 0)
-                        .rotateZ(theta)
-                        .rotateX(phi)
-                        .add(0.3,0,0)
-                        .rotateX(rotation.x)
-                        .rotateY(rotation.y)
-                        .rotateZ(rotation.z)
-                        .normalise()
-                ;
-                project(canvas, lightSource);
+                dotNormal.set(dot).mult(0.4).normalise();
+//                dotNormal.set(1, 0, 0)
+//                        .rotateZ(theta)
+//                        .rotateX(phi)
+//                        .add(0.3,0,0)
+//                        .rotateX(rotation.x)
+//                        .rotateY(rotation.y)
+//                        .rotateZ(rotation.z)
+//                        .normalise()
+//                ;
+                project(frameBuffer, lightSource);
                 dot.set(0.4, 0, 0)
                         .rotateZ(theta)
                         .rotateX(phi)
@@ -43,16 +41,17 @@ public class Spheres extends Figure{
                         .rotateY(rotation.y)
                         .rotateZ(rotation.z)
                 ;
-                dotNormal.set(1, 0, 0)
-                        .rotateZ(theta)
-                        .rotateX(phi)
-                        .add(-0.5,0,0)
-                        .rotateX(rotation.x)
-                        .rotateY(rotation.y)
-                        .rotateZ(rotation.z)
-                        .normalise()
-                ;
-                project(canvas, lightSource);
+                dotNormal.set(dot).mult(0.4).normalise();
+//                dotNormal.set(1, 0, 0)
+//                        .rotateZ(theta)
+//                        .rotateX(phi)
+//                        .add(-0.5,0,0)
+//                        .rotateX(rotation.x)
+//                        .rotateY(rotation.y)
+//                        .rotateZ(rotation.z)
+//                        .normalise()
+//                ;
+                project(frameBuffer, lightSource);
             }
         }
     }
