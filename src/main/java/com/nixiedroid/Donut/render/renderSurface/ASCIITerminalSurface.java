@@ -2,20 +2,20 @@ package com.nixiedroid.Donut.render.renderSurface;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
 
-public class TerminalSurface extends Surface {
+public class ASCIITerminalSurface extends Surface {
     private final StringBuilder sb = new StringBuilder();
     private final char[] charRow;
 
 
-    public TerminalSurface(int width, int height) {
+    public ASCIITerminalSurface(int width, int height) {
         super(width,height);
         ANSI.clearScreen();
         this.charRow = new char[width];
     }
 
 
-    public TerminalSurface( int height) {
-        super((int) (height*2.5),height);
+    public ASCIITerminalSurface(int height) {
+        super(height);
         this.charRow = new char[width];
     }
 
@@ -40,6 +40,6 @@ public class TerminalSurface extends Surface {
     private static final char[] gradient3 = " .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$".toCharArray();
 
     private static char[] getCurrentGradient(){
-        return gradient2;
+        return gradient3;
     }
 }

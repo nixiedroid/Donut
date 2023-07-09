@@ -7,12 +7,16 @@ public class Coords {
     public double y;
     public double z;
     private double sinA, cosA;
-    //private DoubleWrapper cosA = new DoubleWrapper();
 
     public Coords(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public static double dotProduct(Coords a, Coords b) {
+        if (a == null || b == null) return 0;
+        return a.x * b.x + a.y * b.y + a.z * b.z;
     }
 
     public Coords set(double x, double y, double z) {
@@ -21,7 +25,9 @@ public class Coords {
         this.z = z;
         return this;
     }
+
     public Coords set(Coords coords) {
+        if (coords == null) return this;
         this.x = coords.x;
         this.y = coords.y;
         this.z = coords.z;
@@ -36,24 +42,28 @@ public class Coords {
     }
 
     public Coords add(double value) {
-        return add(value,value,value);
+        return add(value, value, value);
     }
 
     public Coords add(Coords value) {
+        if (value == null) return this;
         this.x += value.x;
         this.y += value.y;
         this.z += value.z;
         return this;
     }
-    public Coords mult(double value) {
-        return mult(value,value,value);
+
+    public Coords multiply(double value) {
+        return multiply(value, value, value);
     }
-    public Coords mult(double x, double y, double z) {
+
+    public Coords multiply(double x, double y, double z) {
         this.x *= x;
         this.y *= y;
         this.z *= z;
         return this;
     }
+
     public Coords rotateX(double angle) {
         sinA = FastMath.sinQuick(angle);
         cosA = FastMath.cosQuick(angle);
@@ -62,6 +72,7 @@ public class Coords {
         z = -(tmpY * sinA) + z * cosA;
         return this;
     }
+
     public Coords rotateY(double angle) {
         sinA = FastMath.sinQuick(angle);
         cosA = FastMath.cosQuick(angle);
@@ -70,6 +81,7 @@ public class Coords {
         x = -(tmpZ * sinA) + x * cosA;
         return this;
     }
+
     public Coords rotateZ(double angle) {
         sinA = FastMath.sinQuick(angle);
         cosA = FastMath.cosQuick(angle);
@@ -78,16 +90,17 @@ public class Coords {
         y = -(tmpX * sinA) + y * cosA;
         return this;
     }
-    public double getMagnitude(){
-        return FastMath.invSqrtQuick(x * x + y * y + z * z);
-    }
-    public Coords normalise() {
-        double magnitude = getMagnitude();
-       // double magnitude = invSqrt(x * x + y * y + z * z);
+
+    public void normalise() {
+        double magnitude = FastMath.invSqrtQuick(x * x + y * y + z * z);
         x *= magnitude;
         y *= magnitude;
         z *= magnitude;
-        return this;
+    }
+
+    public double dotProduct(Coords coords) {
+        if (coords == null) return 0;
+        return this.x * coords.x + this.y * coords.y + this.z * coords.z;
     }
 
 }

@@ -10,6 +10,10 @@ public abstract class Surface {
       this.width = width;
       this.height = height;
    }
+   public Surface(int height) {
+      this.width = (int) (height*2.5);
+      this.height = height;
+   }
 
    public abstract void draw(FrameBuffer canvas);
    public int getWidth() {

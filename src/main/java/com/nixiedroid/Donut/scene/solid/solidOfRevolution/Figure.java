@@ -1,8 +1,8 @@
-package com.nixiedroid.Donut.render.figure;
+package com.nixiedroid.Donut.scene.solid.solidOfRevolution;
 
 import com.nixiedroid.Donut.render.*;
 
-public abstract class Figure extends Scene {
+public abstract class Figure implements Scene {
     protected static final double TAU = 6.28f;  //aka 2*PI
     protected final Coords dot = new Coords(0, 0, 0);
     protected final Coords dotNormal = new Coords(0, 0, 0);
@@ -11,12 +11,6 @@ public abstract class Figure extends Scene {
     protected LightSource lightSource = new LightSource.Builder().placeBackwards().placeUp().normalise();
 
     protected abstract double getAngleStep();
-
-    @Override
-    public void calculate(FrameBuffer frameBuffer) {
-        calculateSingleFrame(frameBuffer);
-        rotation.add(rotationScale);
-    }
 
     public Figure setRotation(Coords rotation) {
         this.rotation = rotation;
@@ -35,13 +29,13 @@ public abstract class Figure extends Scene {
     protected void project(FrameBuffer canvas, LightSource lightSource) {
         int xProjection = canvas.projectX(dot.x);
         int yProjection = canvas.projectY(dot.y);
-        double brightness = CMath.dotProduct(lightSource.getCoords(), dotNormal);
+        double brightness = Coords.dotProduct(lightSource.getCoords(), dotNormal);
         if (brightness > 1) brightness = 1;
         if (canvas.ifCoordsInBoundaries(xProjection, yProjection)
                 && dot.z < canvas.getZBuffer()[yProjection][xProjection]
         ) {
             canvas.getZBuffer()[yProjection][xProjection] = dot.z;
-            canvas.getFrameBuffer()[yProjection][xProjection] = brightness;
+            canvas.getFrameBuffer()[yProjection][xProjection] = (brightness>0)?brightness:0;
         }
     }
 }

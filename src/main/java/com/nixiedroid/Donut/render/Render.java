@@ -11,12 +11,7 @@ public class Render {
     private Render() {}
 
     public void drawFrame() {
-        scene.calculate(frameBuffer);
-        renderSurface.draw(frameBuffer);
-    }
-
-    public void drawSingleFrame() {
-        scene.calculateSingleFrame(frameBuffer);
+        scene.calculateNextFrame(frameBuffer);
         renderSurface.draw(frameBuffer);
     }
 

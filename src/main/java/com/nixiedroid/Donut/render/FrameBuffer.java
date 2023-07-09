@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class FrameBuffer {
     private final double[][] zBuffer;
-
     private final double[][] frameBuffer;
     private final int height;
     private final int width;
@@ -53,7 +52,7 @@ public class FrameBuffer {
 
     public int projectX(double normalisedValue) {
         if (normalisedValue > 1) throw new IllegalArgumentException("X = " + normalisedValue + " is not normalised!");
-        return (int) (width / 2 - 1 + (height / 2) * 2.5 * normalisedValue);
+        return (int) (width / 2 - 1 + (height / 2) * (width/height) * normalisedValue);
     }
 
     public int projectY(double normalisedValue) {

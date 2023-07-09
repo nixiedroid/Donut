@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.render.figure;
+package com.nixiedroid.Donut.scene.solid.solidOfRevolution;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
 public class Spheres extends Figure{
@@ -10,7 +10,7 @@ public class Spheres extends Figure{
     }
 
     @Override
-    protected void calculateSingleFrame(FrameBuffer frameBuffer) {
+    public void calculateNextFrame(FrameBuffer frameBuffer) {
         frameBuffer.emptyFrameBuffer();
         for (theta = 0; TAU > theta; theta += getAngleStep()) {
             for (phi = 0; TAU > phi; phi += getAngleStep()) {
@@ -22,16 +22,13 @@ public class Spheres extends Figure{
                         .rotateY(rotation.y)
                         .rotateZ(rotation.z)
                 ;
-                dotNormal.set(dot).mult(0.4).normalise();
-//                dotNormal.set(1, 0, 0)
-//                        .rotateZ(theta)
-//                        .rotateX(phi)
-//                        .add(0.3,0,0)
-//                        .rotateX(rotation.x)
-//                        .rotateY(rotation.y)
-//                        .rotateZ(rotation.z)
-//                        .normalise()
-//                ;
+                dotNormal.set(1, 0, 0)
+                        .rotateZ(theta)
+                        .rotateX(phi)
+                        .rotateX(rotation.x)
+                        .rotateY(rotation.y)
+                        .rotateZ(rotation.z)
+                ;
                 project(frameBuffer, lightSource);
                 dot.set(0.4, 0, 0)
                         .rotateZ(theta)
@@ -41,18 +38,17 @@ public class Spheres extends Figure{
                         .rotateY(rotation.y)
                         .rotateZ(rotation.z)
                 ;
-                dotNormal.set(dot).mult(0.4).normalise();
-//                dotNormal.set(1, 0, 0)
-//                        .rotateZ(theta)
-//                        .rotateX(phi)
-//                        .add(-0.5,0,0)
-//                        .rotateX(rotation.x)
-//                        .rotateY(rotation.y)
-//                        .rotateZ(rotation.z)
-//                        .normalise()
-//                ;
+                dotNormal.set(1, 0, 0)
+                        .rotateZ(theta)
+                        .rotateX(phi)
+                        .rotateX(rotation.x)
+                 .rotateY(rotation.y)
+                  .rotateZ(rotation.z)
+                ;
                 project(frameBuffer, lightSource);
+
             }
         }
+        rotation.add(rotationScale);
     }
 }

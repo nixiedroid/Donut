@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.render.figure;
+package com.nixiedroid.Donut.scene.solid.solidOfRevolution;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
 
@@ -7,11 +7,11 @@ public class Donut extends Figure {
 
     @Override
     protected double getAngleStep() {
-        return 0.01;
+        return 0.005;
     }
 
     @Override
-    public void calculateSingleFrame(FrameBuffer canvas) {
+    public void calculateNextFrame(FrameBuffer canvas) {
         canvas.emptyFrameBuffer();
         for (theta = 0; TAU > theta; theta += getAngleStep()*2) {
             for (phi = 0; TAU > phi; phi += getAngleStep()) {
@@ -32,7 +32,9 @@ public class Donut extends Figure {
                 ;
                 //dotNormal.set(dot).normalise();
                 project(canvas, lightSource);
+
             }
         }
+        rotation.add(rotationScale);
     }
 }

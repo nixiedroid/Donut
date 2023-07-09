@@ -12,7 +12,7 @@ public class LightSource {
         lightSourceCoords.normalise();
         return this;
     }
-
+    @SuppressWarnings("unused")
     public static class Builder {
         private final LightSource lightSource;
         public Builder(){

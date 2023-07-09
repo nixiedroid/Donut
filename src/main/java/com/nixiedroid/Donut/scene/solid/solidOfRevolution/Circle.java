@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.render.figure;
+package com.nixiedroid.Donut.scene.solid.solidOfRevolution;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
 
@@ -10,7 +10,7 @@ public class Circle extends Figure{
     }
 
     @Override
-    public void calculateSingleFrame(FrameBuffer canvas) {
+    public void calculateNextFrame(FrameBuffer canvas) {
         canvas.emptyFrameBuffer();
         for (theta = 0; TAU > theta; theta += getAngleStep()) {
             dot.set(0.8, 0, 0)
@@ -27,5 +27,6 @@ public class Circle extends Figure{
             ;
             project(canvas,lightSource);
         }
+        rotation.add(rotationScale);
     }
 }
