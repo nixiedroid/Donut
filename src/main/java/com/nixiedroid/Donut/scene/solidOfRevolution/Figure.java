@@ -1,23 +1,23 @@
-package com.nixiedroid.Donut.scene.solid.solidOfRevolution;
+package com.nixiedroid.Donut.scene.solidOfRevolution;
 
 import com.nixiedroid.Donut.render.*;
 
 public abstract class Figure implements Scene {
     protected static final double TAU = 6.28f;  //aka 2*PI
-    protected final Coords dot = new Coords(0, 0, 0);
-    protected final Coords dotNormal = new Coords(0, 0, 0);
-    protected Coords rotation = new Coords(0, 0, 0);
-    protected Coords rotationScale = new Coords(0.02, 0, 0.02);
+    protected final Vector3 dot = new Vector3(0, 0, 0);
+    protected final Vector3 dotNormal = new Vector3(0, 0, 0);
+    protected Vector3 rotation = new Vector3(0, 0, 0);
+    protected Vector3 rotationScale = new Vector3(0.02, 0, 0.02);
     protected LightSource lightSource = new LightSource.Builder().placeBackwards().placeUp().normalise();
 
     protected abstract double getAngleStep();
 
-    public Figure setRotation(Coords rotation) {
+    public Figure setRotation(Vector3 rotation) {
         this.rotation = rotation;
         return this;
     }
 
-    public Figure setRotationScale(Coords rotationScale) {
+    public Figure setRotationScale(Vector3 rotationScale) {
         this.rotationScale = rotationScale;
         return this;
     }
@@ -29,7 +29,7 @@ public abstract class Figure implements Scene {
     protected void project(FrameBuffer canvas, LightSource lightSource) {
         int xProjection = canvas.projectX(dot.x);
         int yProjection = canvas.projectY(dot.y);
-        double brightness = Coords.dotProduct(lightSource.getCoords(), dotNormal);
+        double brightness = Vector3.dotProduct(lightSource.getCoords(), dotNormal);
         if (brightness > 1) brightness = 1;
         if (canvas.ifCoordsInBoundaries(xProjection, yProjection)
                 && dot.z < canvas.getZBuffer()[yProjection][xProjection]

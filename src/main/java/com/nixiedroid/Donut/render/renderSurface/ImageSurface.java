@@ -1,13 +1,14 @@
 package com.nixiedroid.Donut.render.renderSurface;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
+import com.nixiedroid.Donut.render.Surface;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImageSurface extends Surface{
+public class ImageSurface extends Surface {
     int rgb;
     public ImageSurface(int width, int height) {
         super(width, height);

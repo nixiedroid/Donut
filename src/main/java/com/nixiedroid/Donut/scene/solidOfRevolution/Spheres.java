@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.scene.solid.solidOfRevolution;
+package com.nixiedroid.Donut.scene.solidOfRevolution;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
 public class Spheres extends Figure{

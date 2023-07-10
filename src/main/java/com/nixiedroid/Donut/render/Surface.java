@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.render.renderSurface;
+package com.nixiedroid.Donut.render;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
 

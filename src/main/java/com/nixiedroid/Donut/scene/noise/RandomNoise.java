@@ -1,8 +1,6 @@
-package com.nixiedroid.Donut.scene.Flat.noise;
+package com.nixiedroid.Donut.scene.noise;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
-
-import java.util.Random;
 
 public class RandomNoise extends Noise{
     @Override

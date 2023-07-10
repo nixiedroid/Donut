@@ -1,11 +1,11 @@
 package com.nixiedroid.Donut.render;
 
 public class LightSource {
-    private final Coords lightSourceCoords;
+    private final Vector3 lightSourceCoords;
     private LightSource() {
-        this.lightSourceCoords = new Coords(0, 0, 0);
+        this.lightSourceCoords = new Vector3(0, 0, 0);
     }
-    public Coords getCoords(){
+    public Vector3 getCoords(){
         return lightSourceCoords;
     }
     private LightSource normalise(){

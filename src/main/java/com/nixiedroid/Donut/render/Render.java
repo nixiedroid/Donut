@@ -1,8 +1,6 @@
 package com.nixiedroid.Donut.render;
 
 
-import com.nixiedroid.Donut.render.renderSurface.Surface;
-
 public class Render {
     private Scene scene;
     private FrameBuffer frameBuffer;

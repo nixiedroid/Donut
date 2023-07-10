@@ -7,6 +7,7 @@ public class FrameBuffer {
     private final double[][] frameBuffer;
     private final int height;
     private final int width;
+    private final double screenRatio;
 
 
     public FrameBuffer(final int width, final int height) {
@@ -14,6 +15,7 @@ public class FrameBuffer {
         this.zBuffer = new double[height][width];
         this.height = height;
         this.width = width;
+        this.screenRatio = (double) width / height;
     }
 
     public double[][] getFrameBuffer() {
@@ -43,29 +45,29 @@ public class FrameBuffer {
     }
 
     public int projectX(double value, double multiplier) {
-        return (int) (width / 2 + (multiplier) * value);
+        return (int) ((width >> 2) + (multiplier) * value);
     }
 
     public int projectY(double value, double multiplier) {
-        return (int) (height / 2 + (multiplier) * value);
+        return (int) ((height >> 2) + (multiplier) * value);
     }
 
-    public int projectX(double normalisedValue) {
-        if (normalisedValue > 1) throw new IllegalArgumentException("X = " + normalisedValue + " is not normalised!");
-        return (int) (width / 2 - 1 + (height / 2) * (width/height) * normalisedValue);
+    public int projectX(double value) {
+        if (value > 1) throw new IllegalArgumentException("X = " + value + " is greater than one!");
+        return (int) ((width >> 2) - 1 + (height >> 2) * screenRatio * value);
     }
 
-    public int projectY(double normalisedValue) {
-        if (normalisedValue > 1) throw new IllegalArgumentException("Y = " + normalisedValue + " is not normalised!");
-        return (int) (height / 2 - 1 + (height / 2) * normalisedValue);
+    public int projectY(double value) {
+        if (value > 1) throw new IllegalArgumentException("Y = " + value + " is greater than one!");
+        return (int) ((height >> 2) - 1 + (height >> 2) * value);
     }
 
-    public int stretchX(double normalisedX) {
-        return (int) (width / 2 - 1 + (width / 2) * normalisedX);
+    public int stretchX(double value) {
+        return (int) ((width >> 2) - 1 + (width >> 2) * value);
     }
 
-    public int stretchY(double normalisedY) {
-        return (int) (height / 2 - 1 + (height / 2) * normalisedY);
+    public int stretchY(double value) {
+        return (int) ((height >> 2) - 1 + (height >> 2) * value);
     }
 
 

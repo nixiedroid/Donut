@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.scene.Flat.noise;
+package com.nixiedroid.Donut.scene.noise;
 
 import java.util.Random;
 

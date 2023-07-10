@@ -1,6 +1,7 @@
 package com.nixiedroid.Donut.render.renderSurface;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
+import com.nixiedroid.Donut.render.Surface;
 
 public class GrayscaleTerminalSurface extends Surface {
     private final StringBuilder sb = new StringBuilder();
