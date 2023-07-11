@@ -1,6 +1,5 @@
 package com.nixiedroid.Donut.render;
 
-public interface  Scene {
+public interface RasterScene {
     void calculateNextFrame(FrameBuffer frameBuffer);
-
 }

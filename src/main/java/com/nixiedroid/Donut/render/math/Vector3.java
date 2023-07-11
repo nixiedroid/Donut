@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.render;
+package com.nixiedroid.Donut.render.math;
 
 import net.jafama.FastMath;
 

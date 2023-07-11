@@ -1,13 +1,12 @@
-import com.nixiedroid.Donut.render.Vector2D;
+import com.nixiedroid.Donut.render.math.Vector2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
-public class Vector2DTest {
-     Vector2D a = new Vector2D(0,0);
-     //Vector2D b = new Vector2D(0,0);
+public class Vector2Test {
+     Vector2 a = new Vector2(0,0);
+     //Vector2 b = new Vector2(0,0);
 
     @Test
     public void addVector(){

@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.render;
+package com.nixiedroid.Donut.render.math;
 
 public final class Angle {
     private static final double PI = 3.141;

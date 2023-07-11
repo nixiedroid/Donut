@@ -1,4 +1,6 @@
-package com.nixiedroid.Donut.render;
+package com.nixiedroid.Donut.render.polygonal;
+
+import com.nixiedroid.Donut.render.math.Vector3;
 
 public abstract class Primitive {
     //public Vector3[] vertices;

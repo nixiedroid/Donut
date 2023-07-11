@@ -1,8 +1,8 @@
-package com.nixiedroid.Donut.scene.poligonal;
+package com.nixiedroid.Donut.scene.polygonal;
 
-import com.nixiedroid.Donut.render.Pivot;
-import com.nixiedroid.Donut.render.Primitive;
-import com.nixiedroid.Donut.render.Vector3;
+import com.nixiedroid.Donut.render.polygonal.Pivot;
+import com.nixiedroid.Donut.render.polygonal.Primitive;
+import com.nixiedroid.Donut.render.math.Vector3;
 
 public class Pyramid extends Primitive {
     public Pyramid(Vector3 center, float sideLen)

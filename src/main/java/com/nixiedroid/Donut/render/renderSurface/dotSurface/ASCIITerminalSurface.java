@@ -1,7 +1,11 @@
-package com.nixiedroid.Donut.render.renderSurface;
+package com.nixiedroid.Donut.render.renderSurface.dotSurface;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
-import com.nixiedroid.Donut.render.Surface;
+import com.nixiedroid.Donut.render.enums.RenderSurfaceType;
+import com.nixiedroid.Donut.render.renderSurface.Surface;
+
+import java.awt.geom.Line2D;
+import java.util.ArrayList;
 
 public class ASCIITerminalSurface extends Surface {
     private final StringBuilder sb = new StringBuilder();
@@ -21,7 +25,7 @@ public class ASCIITerminalSurface extends Surface {
     }
 
     @Override
-    public void draw(FrameBuffer frameBuffer) {
+    public void drawRaster(FrameBuffer frameBuffer) {
             ANSI.moveCursorToHome();
             sb.setLength(0);
             for (int row = 0; row < height; row++) {
@@ -42,5 +46,10 @@ public class ASCIITerminalSurface extends Surface {
 
     private static char[] getCurrentGradient(){
         return gradient3;
+    }
+    @Override
+    public void drawVector(ArrayList<Line2D.Double> lines) {
+        FrameBuffer fb = convertVectorToRaster(lines);
+        drawRaster(fb);
     }
 }

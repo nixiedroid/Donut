@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.render.renderSurface;
+package com.nixiedroid.Donut.render.renderSurface.dotSurface;
 
 public class ANSI {
     public static char escapeChar = '\u001b'; //

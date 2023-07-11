@@ -1,4 +1,7 @@
-package com.nixiedroid.Donut.render;
+package com.nixiedroid.Donut.render.polygonal;
+
+import com.nixiedroid.Donut.render.math.Matrix3x3;
+import com.nixiedroid.Donut.render.math.Vector3;
 
 public class Pivot
 {

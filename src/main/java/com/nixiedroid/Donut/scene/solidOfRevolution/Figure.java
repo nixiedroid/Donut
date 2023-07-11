@@ -1,8 +1,9 @@
 package com.nixiedroid.Donut.scene.solidOfRevolution;
 
 import com.nixiedroid.Donut.render.*;
+import com.nixiedroid.Donut.render.math.Vector3;
 
-public abstract class Figure implements Scene {
+public abstract class Figure implements RasterScene {
     protected static final double TAU = 6.28f;  //aka 2*PI
     protected final Vector3 dot = new Vector3(0, 0, 0);
     protected final Vector3 dotNormal = new Vector3(0, 0, 0);

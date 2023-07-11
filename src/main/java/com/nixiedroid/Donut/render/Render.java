@@ -1,16 +1,18 @@
 package com.nixiedroid.Donut.render;
 
 
+import com.nixiedroid.Donut.render.renderSurface.Surface;
+
 public class Render {
-    private Scene scene;
+    private RasterScene rasterScene;
     private FrameBuffer frameBuffer;
     private Surface renderSurface;
 
     private Render() {}
 
     public void drawFrame() {
-        scene.calculateNextFrame(frameBuffer);
-        renderSurface.draw(frameBuffer);
+        rasterScene.calculateNextFrame(frameBuffer);
+        renderSurface.drawRaster(frameBuffer);
     }
 
     public void drawFrames(final int amount) {
@@ -30,15 +32,15 @@ public class Render {
             return this;
         }
 
-        public Builder usingScene(final Scene scene) {
-            render.scene = scene;
+        public Builder usingScene(final RasterScene rasterScene) {
+            render.rasterScene = rasterScene;
             return this;
         }
 
         public Render build() {
             if (render.renderSurface == null) throw new IllegalArgumentException("Surface is not specified");
             render.frameBuffer =  new FrameBuffer(render.renderSurface.getWidth(),render.renderSurface.getHeight());
-            if (render.scene == null) throw new IllegalArgumentException("Scene not specified");
+            if (render.rasterScene == null) throw new IllegalArgumentException("RasterScene not specified");
             return render;
         }
     }

@@ -1,12 +1,14 @@
-package com.nixiedroid.Donut.render.renderSurface;
+package com.nixiedroid.Donut.render.renderSurface.dotSurface;
 
 import com.nixiedroid.Donut.render.FrameBuffer;
-import com.nixiedroid.Donut.render.Surface;
+import com.nixiedroid.Donut.render.renderSurface.Surface;
 
 import javax.imageio.ImageIO;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ImageSurface extends Surface {
     int rgb;
@@ -14,11 +16,11 @@ public class ImageSurface extends Surface {
         super(width, height);
     }
     public ImageSurface(int height) {
-        super(height);
+        super(height,height);
     }
 
     @Override
-    public void draw(FrameBuffer canvas) {
+    public void drawRaster(FrameBuffer canvas) {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < canvas.getHeight(); i++) {
             for (int j = 0; j < canvas.getWidth(); j++) {
@@ -33,5 +35,10 @@ public class ImageSurface extends Surface {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Override
+    public void drawVector(ArrayList<Line2D.Double> lines) {
+        FrameBuffer fb = convertVectorToRaster(lines);
+        drawRaster(fb);
     }
 }

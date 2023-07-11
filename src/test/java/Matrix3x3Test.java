@@ -1,5 +1,5 @@
-import com.nixiedroid.Donut.render.Matrix3x3;
-import com.nixiedroid.Donut.render.Vector3;
+import com.nixiedroid.Donut.render.math.Matrix3x3;
+import com.nixiedroid.Donut.render.math.Vector3;
 import org.junit.jupiter.api.Test;
 
 public class Matrix3x3Test {

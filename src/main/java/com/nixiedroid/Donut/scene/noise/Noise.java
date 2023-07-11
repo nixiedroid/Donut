@@ -1,6 +1,6 @@
 package com.nixiedroid.Donut.scene.noise;
 
-import com.nixiedroid.Donut.render.Scene;
+import com.nixiedroid.Donut.render.RasterScene;
 
-public abstract class Noise implements Scene {
+public abstract class Noise implements RasterScene {
 }

@@ -1,5 +1,7 @@
 package com.nixiedroid.Donut.render;
 
+import com.nixiedroid.Donut.render.math.Vector3;
+
 public class LightSource {
     private final Vector3 lightSourceCoords;
     private LightSource() {

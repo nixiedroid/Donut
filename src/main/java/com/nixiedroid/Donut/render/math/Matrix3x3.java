@@ -1,4 +1,4 @@
-package com.nixiedroid.Donut.render;
+package com.nixiedroid.Donut.render.math;
 
 public class Matrix3x3 {
     Vector3 x;
